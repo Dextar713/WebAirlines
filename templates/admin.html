@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    <script src="/action.js"></script>
+    
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/admin.css">
+    <script src="/main.js"></script> 
+    
+</head>
+
+
+<header>
+  <%- include('header.html'); %> 
+</header>
+
+<section id="menu">
+    <h1>Admin Menu</h1>
+    <ul>
+        <li><a href="/airline/flight_add">Schedule a flight</a></li>
+        <li><a href="#">Cancel flight</a></li>
+        <li><a href="#">Delay flight</a></li>
+        <li><a href="/airline">View upcoming flights</a></li>
+    </ul>
+</section>
+
+<footer>
+    <%- include('footer.html'); %>
+  </footer>

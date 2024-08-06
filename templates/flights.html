@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/flights.css">
+    
+    <script src="/main.js"></script> 
+    
+</head>
+
+
+<header>
+  <%- include('header.html'); %> 
+</header>
+
+<section id="content">
+  
+    <div class="upcoming">
+      <h1><%=user.username%> <%= flights.length %> flights found</h1>
+      <div class="flex-flights">
+        <% flights.forEach(flight=> { 
+          var start_date = new Date(flight.departure_time);
+          var tm = flight.departure_time.split("T")[1];
+          tm = tm.substring(0, 8);
+          var date_str = flight.departure_time.split("T")[0] + " " + tm.substring(0,5);
+          var end_date = new Date(start_date.getTime() + flight.duration*60000);
+          var end_date_str = end_date.toISOString();
+          var tm_end = end_date_str.split("T")[1];
+          tm_end = tm_end.substring(0, 8);
+          var end_str = end_date_str.split("T")[0]+ " " + tm_end.substring(0,5);
+          %>
+        <button class="fwrap" onclick="(function() {window.location.href='/airline/flight/<%=flight.id%>'})()">
+          <div class="flight">
+              <h3><%=flight.dep_city%> -> <%=flight.target_city%></h3>
+          </div>
+          <h3><%=date_str%></h3>
+          <h3><%-end_str%></h3>
+          <h3>Price: <%= flight.price %>$</h3>
+        </button>
+        <% }); %>
+        
+    </div>
+    </div>
+  
+  
+  </section>
+  
+  <footer>
+    <%- include('footer.html'); %>
+  </footer>

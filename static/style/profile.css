@@ -1,0 +1,371 @@
+html {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    /* padding-bottom: 20px; */
+}
+
+nav > ul {
+    padding: 10px;
+    margin: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    /* align-items: center; */
+    margin: 0;
+}
+
+nav > ul > li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* nav ul li:last-child {
+    margin-bottom: 10px;
+} */
+
+nav > ul > li:nth-child(3):hover .dropdown, nav > ul > li:nth-child(4):hover .dropdown {
+    display: inline-block;
+    position: relative;
+    z-index: 1000;
+    top: 10px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    animation: dropdown-appear ease 1s;
+    /* background-color: aqua; */
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 3px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+nav > ul > li > a > img {
+    background: none;
+}
+
+nav > ul > li:nth-child(2) > a:hover, nav > ul > li:nth-child(5) > a:hover {
+    color: black;
+    background-color: lightgray;
+    transform: scale(1.1);
+}
+
+nav > ul > li:nth-child(2) > a:hover svg, nav > ul > li:nth-child(5) > a:hover {
+    fill: black;
+    transform: scale(1.1);
+}
+
+.personal {
+    background-image: url('/dark-city.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-width: 500px;
+    margin: auto;
+    /* height: 100vh; */
+}
+
+.about-text h1 {
+    text-align: center;
+    margin: 0;
+}
+
+.about-text h2 {
+    text-align: center;
+    font-size: 1rem;
+}
+
+
+.profile-img {
+    border: 5px solid lightgray;
+    border-radius: 50%;
+    min-width: 300px;
+    max-width: 330px;
+    min-height: 400px;
+    transition: transform ease 0.7s; 
+    /* width: 370px;
+    height: 300px; */
+}
+
+.profile-img:hover {
+    transform: scale(1.1);
+}
+
+.description {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.about-text {
+    margin-top: 0;
+    margin-right: 50px;
+    width: 500px;
+}
+
+.about-text  p {
+    text-align: center;
+    line-height: 25px;
+    border: 3px solid lightgray;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.titles {
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+
+
+#projects h1 {
+    margin-bottom: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.proj {
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    transition: transform 0.5s ease;
+}
+
+.proj:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 3px 3px lightgray;
+    transform: scale(1.1);
+}
+
+.proj h2 {
+    font-size: 23px;
+}
+
+.tech {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tech h3 {
+    font-size: 17px;
+    border: 3px solid white;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.tech h3:hover {
+    color: black;
+    background-color: lightgray;
+    transform: scale(1.1);
+}
+
+.container > .proj:nth-of-type(1) div.proj-img {
+    width: 300px;
+    height: 250px;
+    background-image: url('/polygon.png');
+    border-radius: 10px;
+    background-size: cover;
+}
+
+.container > .proj:nth-of-type(2) div.proj-img {
+    width: 300px;
+    height: 250px;
+    background-image: url('/chess_fortune.png');
+    border-radius: 10px;
+    background-size: cover;
+}
+
+.container > .proj:nth-of-type(3) div.proj-img {
+    width: 300px;
+    height: 250px;
+    background-image: url('/airlines.png');
+    border-radius: 10px;
+    background-size: contain;
+}
+
+footer {
+    width: 100%;
+    margin-bottom: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 0;
+    background-color: black;
+}
+
+.flex-item {
+    width: 300px;
+    background-image: url('/dark-city.jpg');
+    background-size: cover;
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+    text-align: center;
+  }
+
+footer .flex-item ul {
+    list-style: none;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+footer .flex-item ul li {
+    transition: transform 0.5s ease;
+}
+
+footer .flex-item ul li:hover {
+    transform: scale(1.2);
+}
+
+.dropdown {
+    margin-top: 10px;
+    display: none;
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+}
+
+.dropdown li {
+    margin-left: 0;
+    border-radius: 7px;
+    padding: 10px;
+    border: 2px solid white;
+    background-color: black;
+}
+
+.dropdown li p {
+    margin: 0;
+    font-size: 17px;
+}
+
+
+.animated-text {
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% {
+        color: white;
+        text-shadow: none;
+    }
+    50% {
+        color: #ffcc00; /* Change to your desired shining color */
+        text-shadow: 0 0 10px #ffcc00; /* Change to your desired shining color */
+    }
+    100% {
+        color: white;
+        text-shadow: none;
+    }
+  }
+
+@keyframes slideIn {
+    0% {
+        transform: translate(-50px, -50px);
+        opacity: 0;
+        rotate: 30deg;
+    }
+    100% {
+        transform: translate(0, 0);
+        rotate: 0deg;
+        opacity: 1;
+    }
+}
+
+
+@keyframes rotate_me {
+    from {
+      transform: rotate(0deg); /* Start rotating from 0 degrees */
+    }
+    to {
+      transform: rotate(360deg); /* Rotate to 360 degrees (full circle) */
+    }
+  }
+
+  @keyframes dropdown-appear {
+    0% {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+.UL, .UR {
+    animation: rotate_me 5s linear infinite;
+}
+
+
+
+
+@media screen and (max-width: 900px) {
+
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+
+    .UL img, .UR img {
+        width: 27px;
+    }
+
+    .proj {
+        margin-bottom: 40px;
+    }
+
+    .description {
+        display: block;
+    }
+
+    nav ul {
+        justify-content: space-between;
+    }
+
+    .about-text {
+        width: 350px;
+        margin: auto;
+    }
+
+    .about-text p {
+        font-size: 16px;
+    }
+
+    .profile-img {
+        display: block !important;
+        margin: auto;
+    }
+
+    .my-img {
+        margin: auto !important;
+    }
+}

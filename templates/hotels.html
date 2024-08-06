@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/hotels.css">
+    <script src="/main.js"></script>
+    <script src="/hotels.js"></script> 
+</head>
+
+
+<header>
+  <%- include('header.html'); %> 
+</header>
+
+<section class="find_hotels" style="padding-top: 50px; padding-bottom: 70px; text-align: center; line-height: 50px;">
+<form id="hotels" method="post">
+    <label for="hotel">Find a hotel</label>
+    <input type="text" name="hotel" id="hotel">
+    <input type="submit" value="Search" name="submit" id="submit">
+</form>
+</section>
+
+
+<% if(hotels) { 
+    for(hotel of hotels) { %>
+        <div style="padding-bottom: 50px;">
+            <h1>Hotel name: <%=hotel.name %></h1>
+            <h2>Price: <%=hotel.rate_per_night.lowest %></h2>
+        </div>
+    <% }
+} %>
+
+<footer>
+    <%- include('footer.html'); %>
+</footer>

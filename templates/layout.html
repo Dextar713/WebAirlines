@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/air_icon.svg">
+    {% endblock %}
+    <link rel="stylesheet" href="{{url_for('static', filename='/style/nav.css')}}">
+    <link rel="stylesheet" href="/static/style/footer.css">
+    <script src="/static/js/action.js"></script>
+    {% block styles %}
+    
+    <link rel="stylesheet" href="/static/style/main.css">
+    
+    <script src="/static/js/main.js"></script> 
+    <!-- next time here after % end styles 2 links -->
+    {% endblock %}
+    
+</head>
+<body>
+  {% block navbar %}
+  {% include "header.html" %}
+  {% endblock %}
+
+  {% block content %}
+
+  {% endblock %}
+
+  {% block footer %}
+  {% include "footer.html" %}
+  {% endblock %}
+
+</body>
+</html>

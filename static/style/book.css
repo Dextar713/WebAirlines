@@ -1,0 +1,53 @@
+#booking {
+    margin-top: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    border: 3px solid purple;
+    padding: 15px;
+    border-radius: 7px;
+    text-align: center;
+}
+
+
+
+#booking h1 {
+    margin-bottom: 30px;
+}
+
+/* #book {
+    background-color: aqua;
+} */
+
+#book input, #book select {
+    margin-right: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /* height: 30px; */
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px;
+    padding-bottom: 8px;
+}
+
+label[for="price"] {
+    display: inline-block;
+}
+
+#book label {
+    margin-right: 10px;
+}
+
+.searcher {
+    text-align: center;
+}
+
+#submit:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px){
+    section#booking {
+        margin-top: 30px;
+    }
+}

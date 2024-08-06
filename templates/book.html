@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/book.css">
+    <script src="/main.js"></script>
+    <script src="/book.js"></script> 
+</head>
+
+
+<header>
+  <%- include('header.html'); %> 
+</header>
+
+<section id="booking">
+    <h1>Select your flight</h1>
+
+    <form method="post" id="book">
+        <label for="start_date">Departure date</label>
+        <input type="date" name="start_date" id="start_date">
+
+        <div>
+            <label for="start_city">From:</label>
+            <select name="start_city" id="start_city" form="book">
+                <% for(city of cities) { %>
+                    <option value=<%=city.city_name%>> <%=city.city_name%> </option>
+                <% } %>
+            </select>
+
+            <label for="end_city">To:</label>
+            <select name="end_city" id="end_city" form="book">
+                <% for(city of cities) { %>
+                    <option value=<%=city.city_name%>> <%=city.city_name%> </option>
+                <% } %>
+            </select>
+        </div>
+
+
+        <div>
+            <label for="price">Price limit</label>
+            <input type="range" name="price" id="price" min="0" max="5000" value="100" 
+            oninput="this.nextElementSibling.value = this.value+'$'">
+            <output>"100$"</output>
+        </div>
+        <div class="searcher">
+            <input type="submit" value="Search" id="submit">
+        </div>
+    </form>
+</section>
+
+<footer>
+    <%- include('footer.html'); %>
+  </footer>

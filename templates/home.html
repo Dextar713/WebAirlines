@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    <script src="/action.js"></script>
+    
+    <link rel="stylesheet" href="/main.css">
+    
+    <script src="/main.js"></script> 
+    
+</head>
+
+
+<header>
+  <%- include('header.html'); %> 
+</header>
+
+
+
+<section id="content">
+
+  <!-- <h1>Top Destinations</h1> -->
+
+  <div class="flights-show">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="slide">
+      <h1>Paris, France</h1>
+      <img src="/paris.jpg" style="width:100%" height="300px">
+    </div>
+  
+    <div class="slide">
+      <h1>Istanbul, Turkey</h1>
+      <img src="/istanbul.jpg" style="width:100%" height="300px">
+    </div>
+  
+    <div class="slide">
+      <h1>Monaco</h1>
+      <img src="/monaco.jpg" style="width:100%" height="300px">
+    </div>
+  
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  
+  
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+
+  <div class="upcoming">
+    <h1>Upcoming flights</h1>
+    <div class="flex-flights">
+      <% for (f of all_flights) { 
+            var start_date = new Date(f.departure_time);
+            var start_date_str = start_date.toISOString();
+            var tm = start_date_str.split("T")[1];
+            tm = tm.substring(0, 8);
+            var date_str = start_date_str.split("T")[0] + " " + tm.substring(0,5);
+            var end_date = new Date(start_date.getTime() + f.duration*60000);
+            var end_date_str = end_date.toISOString();
+            var tm_end = end_date_str.split("T")[1];
+            tm_end = tm_end.substring(0, 8);
+            var end_str = end_date_str.split("T")[0]+ " " + tm_end.substring(0,5); %>   
+
+      <button class="fwrap" onclick="(function() {window.location.href='/airline/flight/<%=f.id%>'})()">
+        <div class="flight">
+            <h3><%= f.c1 %> -> <%= f.c2 %></h3>
+        </div>
+        <h3><%= date_str %></h3>
+        <h3><%= end_str %></h3>
+        <h3><%= f.price %>$</h3>
+      </button> 
+      <% } %>
+
+  </div>
+  </div>
+
+  <div class="features">
+    <h1>Our features</h1>
+    <div class="flex-flights">
+      <div class="flex-item">
+        <img src="/quality.svg" width="40px">
+        <h2>Quality</h2>
+        <p>We offer you high quality services. Our team consists of professionals.</p>
+      </div>
+
+      <div class="flex-item">
+        <img src="/time.svg" width="40px">
+        <h2>Time</h2>
+        <p>We value your time. Our services are delivered as fast as possible. No delays.</p>
+      </div>
+
+      <div class="flex-item">
+        <img src="/security.svg" width="40px">
+        <h2>Security</h2>
+        <p>During the flight your safety is guaranteed. Also we respect the privacy of all your data.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <%- include('footer.html'); %>
+</footer>

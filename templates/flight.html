@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextar Airlines</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    
+    <link rel="stylesheet" href="/main.css">
+    
+    <link rel="stylesheet" href="/flight.css">
+    <script src="/main.js"></script> 
+
+    <script src="/flight.js"></script>
+    
+</head>
+
+
+<header>
+  <%- include('header.html'); %> 
+</header>
+
+<section id="content">
+  
+    <div class="f">
+         <%
+          var start_date = new Date(flight.departure_time);
+          var start_date_str = start_date.toISOString();
+          var tm = start_date_str.split("T")[1];
+          tm = tm.substring(0, 8);
+          var date_str = start_date_str.split("T")[0] + " " + tm.substring(0,5);
+          var end_date = new Date(start_date.getTime() + flight.duration*60000);
+          var end_date_str = end_date.toISOString();
+          var tm_end = end_date_str.split("T")[1];
+          tm_end = tm_end.substring(0, 8);
+          var end_str = end_date_str.split("T")[0]+ " " + tm_end.substring(0,5);
+          %>
+            <h1>Flight info</h1>
+          <h2>Departure city: <%=flight.c1%> </h2>
+          <h2>Arrival city: <%=flight.c2%> </h2>
+          <h2>Departure time: <%=date_str%> </h2>
+          <h2>Arrival time: <%=end_str%> </h2>
+          <h2>Price: <%=flight.price%>$ </h2>
+          <% if(flight.rem_seats) { %>
+            <h2>Remaining seats: <%=flight.rem_seats%></h2> <%}%>
+          <% if(user&&user.username==='dextar') { %>
+            <form method="post" action="/airline/flight/<%=flight.id%>/cancel">
+                <input type="submit" value="Cancel flight" />
+            </form>
+            <form method="post" action="/airline/flight/<%=flight.id%>/delay">
+                <label for="delay">Delay in minutes:</label>
+                <input type="number" min="-1000" max="1000" name="delay" id="delay">
+                <input type="submit" value="Delay flight"/>
+            </form>
+            <% } %>
+            <form method="post" id="reserve" action="/airline/flight/<%=flight.id%>/book">
+                <label for="cnt_people">Passengers number</label>
+                <input type="number" name="cnt_people" id="cnt_people" min="1" max="10" value="1">
+                <input type="submit" value="Book" />
+            </form>
+    </div>
+        
+    </div>
+    </div>
+  
+  
+  </section>
+  
+  <footer>
+    <%- include('footer.html'); %>
+  </footer>
