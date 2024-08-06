@@ -7,23 +7,24 @@ const path = require('path');
 const app = express();
 const session = require('express-session');
 const { getJson } = require("serpapi");
-const { MongoClient, ServerApiVersion } = require('mongodb');
+//const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
 var mysql = require('mysql2/promise');
 
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
 
-var db;
-var coll;
+// const client = new MongoClient(uri, {
+//     serverApi: {
+//       version: ServerApiVersion.v1,
+//       strict: true,
+//       deprecationErrors: true,
+//     }
+//   });
+
+// var db;
+// var coll;
 var con;
  
-
+/*
 async function connect_mongo() {
     try {
         await client.connect();
@@ -33,6 +34,7 @@ async function connect_mongo() {
     db = client.db("DexAir");
     coll = db.collection("users");
 }
+*/
 
 async function sqlCon() {
     con = mysql.createPool({
@@ -382,7 +384,7 @@ app.listen(5000, () => {
 })
 
 async function connect() {
-    await connect_mongo();
+    //await connect_mongo();
     await sqlCon();
 }
 
