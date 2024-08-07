@@ -18,7 +18,7 @@ function sendCredentials() {
             //window.location = "http://localhost:5000/airline/register";
         } else {
             //toggleLogin();
-            window.location = "http://localhost:5000" + res.url;
+            window.location.href = window.location.href.slice(0, window.location.href.length - 6);
         }
     });
 }

@@ -7,5 +7,5 @@ function convex_git() {
 }
 
 function air_git() {
-    window.location = "http://localhost:5000/airline";
+    window.location.href = window.location.href + "/airline";
 }

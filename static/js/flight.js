@@ -16,7 +16,7 @@ window.onload = function() {
                 //window.location = "http://localhost:5000/airline/register";
             } else {
                 alert("Reservation successfull))")
-                window.location = "http://localhost:5000" + res.url;
+                window.location.reload();
             }
         });
     }) 
