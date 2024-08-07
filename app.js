@@ -89,7 +89,7 @@ app.use(session({
    
 
 function logger(req, res, next) {
-    if(req.session.username) {
+    if(req.session.user) {
         next();
     } else {
         next();
@@ -98,7 +98,7 @@ function logger(req, res, next) {
 }
 
 function admin_log(req, res, next) {
-    if(req.session.username === 'dextar') {
+    if(req.session.user.username === 'dextar') {
         next();
     } else {
         backURL=req.header('Referer') || '/';
@@ -114,14 +114,14 @@ app.get('/airline', async (req, res) => {
     if(!req.session.all_flights) {
         req.session.all_flights = await getUpcomingFlights();
     }
-    res.render('home.html', {user: req.session.username, all_flights: req.session.all_flights});
+    res.render('home.html', {user: req.session.user, all_flights: req.session.all_flights});
 })
 
 app.get('/airline/book_flight', logger, async (req, res) => {
     if(!req.session.cities) {
         req.session.cities = await getCities();
     }
-    res.render('book.html', {user: req.session.username, cities: req.session['cities']});
+    res.render('book.html', {user: req.session.user, cities: req.session['cities']});
 })
 
 app.post('/airline/book_flight', [urlParser, logger], async (req, res) => {
@@ -153,11 +153,11 @@ app.post('/airline/book_flight', [urlParser, logger], async (req, res) => {
 })
 
 app.get('/airline/target_flights', logger, (req, res) => {
-    res.render('flights.html', {user: req.session.username, flights: req.session["flights"]});
+    res.render('flights.html', {user: req.session.user, flights: req.session["flights"]});
 })
 
 app.get('/airline/hotels', (req, res) => {
-    res.render('hotels.html', {user: req.session.username, hotels: req.session.hotels});
+    res.render('hotels.html', {user: req.session.user, hotels: req.session.hotels});
 })
 
 app.post('/airline/hotels', urlParser, (req, res) => {
@@ -185,16 +185,16 @@ app.post('/airline/hotels', urlParser, (req, res) => {
 })
 
 app.get('/airline/login', (req, res) => {
-    if(req.session.username) {
+    if(req.session.user) {
         res.redirect('/airline');
     } else {
-        res.render('login.html', {user: req.session.username});
+        res.render('login.html', {user: req.session.user});
     }
 })
 
 
 app.post('/airline/login', jsonParser, async (req, res) => {
-    if(req.session.username) {
+    if(req.session.user) {
         res.redirect('/airline');
     } else {
         //console.log(req.body);
@@ -212,7 +212,7 @@ app.post('/airline/login', jsonParser, async (req, res) => {
        var user_exists = await con.query("select people.*, c.username, c.id as client_id from people \
                                 join clients c on c.person_id = people.id where username=? and password=?", [user, pass]);
        if(user_exists[0].length > 0) {
-          req.session.username = user_exists[0][0];
+          req.session.user = user_exists[0][0];
           res.json({"url": "/airline"});
        } else {
             res.json({"error":"Invalid credentials"});
@@ -221,15 +221,15 @@ app.post('/airline/login', jsonParser, async (req, res) => {
 })
 
 app.get('/airline/register', (req, res) => {
-    if(req.session.username) {
+    if(req.session.user) {
         res.redirect('/airline');
     } else {
-        res.render('register.html', {user: req.session.username});
+        res.render('register.html', {user: req.session.user});
     }
 })
 
 app.post('/airline/register', jsonParser, async (req, res) => {
-    if(req.session.username) {
+    if(req.session.user) {
         res.render('/home.html');
     } else {
         //console.log(req.body);
@@ -270,7 +270,7 @@ app.post('/airline/register', jsonParser, async (req, res) => {
                 "email": email, 
                 "client_id": mx_id1
             }
-            req.session.username = user_obj;
+            req.session.usern = user_obj;
             res.json({"url": '/airline'})
         } catch(err) {
             console.log(err)
@@ -286,7 +286,7 @@ app.get("/airline/logout", (req, res) => {
 });
 
 app.get("/airline/admin", (req, res) => {
-    res.render('admin.html', {user: req.session.username})
+    res.render('admin.html', {user: req.session.user})
 })
 
 app.get("/airline/flight/:id", async (req, res) => {
@@ -295,7 +295,7 @@ app.get("/airline/flight/:id", async (req, res) => {
     var flight_id = parseInt(req.params.id);
     var f = await getFlightById(flight_id);
     //res.redirect('/airline');
-    res.render('flight.html', {user: req.session.username, flight: f})
+    res.render('flight.html', {user: req.session.user, flight: f})
 })
 
 app.post("/airline/flight/:id/cancel", async (req, res) => {
@@ -325,7 +325,7 @@ app.post("/airline/flight/:id/book", jsonParser, async (req, res) => {
         //console.log("Impossible no places left")
         res.json({"error": "Not enough seats left"})
     } else {
-        await reserve(flight_id, req.session.username.client_id, people_num, f.price);
+        await reserve(flight_id, req.session.user.client_id, people_num, f.price);
         req.session.flights = await getUpcomingFlights();
 
         // add reservation, decrease number of seats
@@ -337,7 +337,7 @@ app.get("/airline/flight/:id", async (req, res) => {
     //console.log(req.params)
     var flight_id = parseInt(req.params.id);
     var f = await getFlightById(flight_id);
-    res.render('flight.html', {user: req.session.username, flight: f})
+    res.render('flight.html', {user: req.session.user, flight: f})
 })
 
 app.get("/airline/flight_add", async (req, res) => {
@@ -348,7 +348,7 @@ app.get("/airline/flight_add", async (req, res) => {
         req.session.planes = await getPlanes();
     }
     
-    res.render('flight_add.html', {user: req.session.username, cities: req.session.cities, planes: req.session.planes})
+    res.render('flight_add.html', {user: req.session.user, cities: req.session.cities, planes: req.session.planes})
 })
 
 app.post("/airline/flight_add", urlParser, async (req, res) => {
@@ -374,6 +374,30 @@ app.post("/airline/flight_add", urlParser, async (req, res) => {
     var r = await con.query(q3, params);
     req.session.all_flights = await getUpcomingFlights();
     res.redirect('/airline/admin')
+})
+
+app.get("/airline/profile", async (req, res) => {
+    const q = "select all_flights.*, r.status, r.amount_due, r.id as booking_id from all_flights \
+    join reservations r on all_flights.id = r.flight_id where r.client_id = ?"
+    var f = await con.query(q, [req.session.user.client_id]); 
+    const q2 = "select count(flight_id) as total_flights from reservations where client_id = ?"
+    var cnt_fl = await con.query(q2, [req.session.user.client_id]);
+    const q3 = "select total_hours from total_hours where client_id = ?"
+    var hours = await con.query(q3, [req.session.user.client_id]) 
+    const q4 = "select country_name, city_name from top_destinations where client_id = ? limit 1;"
+    var top_dest = await con.query(q4, [req.session.user.client_id]);
+    //console.log(top_dest)
+    res.render('dashboard.html', {user: req.session.user, bookings: f[0], stats: {
+        "total_hours": hours[0][0].total_hours,
+        "total_flights": cnt_fl[0][0].total_flights,
+        "top_dest": top_dest[0][0]  
+    }})
+})
+
+app.post("/airline/cancel_reservation/:id", async (req, res) => {
+    const q = "delete from reservations where id=?";
+    await con.query(q, [parseInt(req.params.id)]);
+    res.redirect('/airline/profile'); 
 })
 
 

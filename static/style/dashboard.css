@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+#profile {
+    max-width: 900px;
+    margin: 30px auto;
+    margin-top: 90px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile-header .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1em;
+}
+
+.profile-header h1 {
+    /* margin: auto;
+    margin-left: 30px; */
+    /* margin-bottom: 0.5em; */
+}
+
+.profile-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.bookings, .statistics {
+    flex: 1;
+    margin: 1em;
+}
+
+.bookings h2, .statistics h2 {
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 0.5em;
+}
+
+.booking-list, .stats-list {
+    margin-top: 1em;
+}
+
+.booking-item, .stat-item {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 1em;
+    margin: 0.5em 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking-item:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+.stat-item i {
+    font-size: 1.2em;
+    margin-right: 0.5em;
+    color: #007BFF;
+}
+
+.stat-item p {
+    display: inline;
+    font-size: 25px;
+}
+
+.main-head, hr {
+    display: none;
+}
+
+#cancel > input {
+    font-size: 20px;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid 3px lightgray;
+    background-color: #007BFF;
+    color: white;
+}
+
+@media screen and (max-width: 800px) {
+    #profile {
+       margin-top: 10px;
+    }
+ }

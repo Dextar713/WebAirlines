@@ -1,5 +1,5 @@
 #booking {
-    margin-top: 180px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
@@ -48,6 +48,6 @@ label[for="price"] {
 
 @media screen and (max-width: 800px){
     section#booking {
-        margin-top: 30px;
+        margin-top: 10px;
     }
 }

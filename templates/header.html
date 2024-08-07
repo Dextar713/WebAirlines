@@ -16,7 +16,7 @@
                 </li>
                 <li><a href="/airline/hotels">Hotels</a></li> 
                 <% if(user) { %>
-                    <li><a href="#"><%=user.username%></a></li> <!--If user not logged in login/register, else username-->
+                    <li><a href="/airline/profile"><%=user.username%></a></li> <!--If user not logged in login/register, else username-->
                 <% } else { %>
                     <li><a href="/airline/login">Login</a></li> <!--If user not logged in login/register, else username-->
                 <% } %>

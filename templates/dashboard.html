@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="icon" type="image/x-icon" href="/air_icon.svg">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/dashboard.css">
+    <script src="/main.js"></script>
+    <script src="/dashboard.js"></script>
+</head>
+<body>
+    <header>
+      <%- include('header.html'); %>
+    </header>
+
+    <section id="profile">
+        <div class="profile-header">
+            <img src="/robot77.jpg" alt="Profile Picture" class="profile-picture">
+            <h1>Welcome, <%= user.username %>!</h1>
+        </div>
+        <div class="profile-content">
+            <div class="bookings">
+                <h2>Your Bookings</h2>
+                <div class="booking-list">
+                    <% bookings.forEach(function(booking) { %>
+                        <div class="booking-item" onclick="(function() {window.location.href='/airline/flight/<%=booking.id%>'})()">
+                            <p>Departure city: <%= booking.c1 %></p>
+                            <p>Arrival city: <%= booking.c2 %></p>
+                            <p>Departure time: <%= booking.departure_time %></p>
+                            <p>Reservation status: <%= booking.status %></p>
+                            <p>Cost: <%= booking.amount_due %>$</p>
+                            <form action="/airline/cancel_reservation/<%=booking.booking_id%>" id="cancel" method="post">
+                                <input type="submit" value="Cancel reservation">
+                            </form>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+            <div class="statistics">
+                <h2>Your Statistics</h2>
+                <div class="stats-list">
+                    <div class="stat-item">
+                        <i class="fas fa-plane"></i>
+                        <p>Total Flights: <%= stats.total_flights %></p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Total Hours Flown: <%= stats.total_hours %></p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Top Destination: <%= stats.top_dest.city_name %>, <%=stats.top_dest.country_name%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <%- include('footer.html'); %>
+    </footer>
+</body>
+</html>
