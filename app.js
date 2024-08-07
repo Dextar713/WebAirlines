@@ -87,6 +87,10 @@ app.use(session({
     }
    }));
    
+   
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
 
 function logger(req, res, next) {
     if(req.session.user) {
