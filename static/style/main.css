@@ -104,7 +104,7 @@ section#content {
 .flight {
   background-image: url('/berlin.jpg');
   width: 300px;
-  height: 300px;
+  height: 250px;
   border-radius: 20px;
 }
 

@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="/air_icon.svg">
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="/action.js"></script>
     
     <link rel="stylesheet" href="/main.css">
@@ -76,9 +77,9 @@
         <div class="flight">
             <h3><%= f.c1 %> -> <%= f.c2 %></h3>
         </div>
-        <h3><%= date_str %></h3>
-        <h3><%= end_str %></h3>
-        <h3><%= f.price %>$</h3>
+        <h3><i class="fas fa-plane-departure"></i>  <%= date_str %></h3>
+        <h3><i class="fas fa-plane-arrival"></i>  <%= end_str %></h3>
+        <h3><%= f.price %><i class="fas fa-dollar-sign"></i></h3>
       </button> 
       <% } %>
 

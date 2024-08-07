@@ -81,7 +81,10 @@ app.use(express.static(path.join(__dirname, 'static/style')));
 app.use(session({
     secret: 'abcdefg', // folosit pentru criptarea session ID-ului
     resave: true, //sa nu stearga sesiunile idle
-    saveUninitialized: false //nu salveaza obiectul sesiune daca nu am setat un camp
+    saveUninitialized: false, //nu salveaza obiectul sesiune daca nu am setat un camp
+    cookie: {
+        maxAge: 2 * 60 * 60 * 1000 // 2 hours in milliseconds
+    }
    }));
    
 
