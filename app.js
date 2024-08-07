@@ -38,11 +38,11 @@ async function connect_mongo() {
 
 async function sqlCon() {
     con = mysql.createPool({
-        host: "localhost",
-        port:3306, 
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT, 
         user: process.env.MYSQL_USER,
         password: process.env.MYSQL_PASS,
-        database: "airlines"
+        database: process.env.MYSQL_DB
       });
       
       con.getConnection(function(err) {
@@ -293,7 +293,9 @@ app.get("/airline/flight/:id", async (req, res) => {
     //console.log(req.params.id)
     //console.log(77)
     var flight_id = parseInt(req.params.id);
+    console.log(flight_id)
     var f = await getFlightById(flight_id);
+    console.log(f);
     //res.redirect('/airline');
     res.render('flight.html', {user: req.session.user, flight: f})
 })
@@ -387,10 +389,20 @@ app.get("/airline/profile", async (req, res) => {
     const q4 = "select country_name, city_name from top_destinations where client_id = ? limit 1;"
     var top_dest = await con.query(q4, [req.session.user.client_id]);
     //console.log(top_dest)
+    var total_hours = 0, total_flights = 0, top_d = 'No flights yet';
+    if(cnt_fl[0][0]) {
+        total_flights = cnt_fl[0][0].total_flights;
+    }
+    if(hours[0][0]) {
+        total_hours = hours[0][0].total_hours;
+    }
+    if(top_dest[0][0]) {
+        top_d = top_dest[0][0];
+    }
     res.render('dashboard.html', {user: req.session.user, bookings: f[0], stats: {
-        "total_hours": hours[0][0].total_hours,
-        "total_flights": cnt_fl[0][0].total_flights,
-        "top_dest": top_dest[0][0]  
+        "total_hours": total_hours,
+        "total_flights": total_flights,
+        "top_dest": top_d  
     }})
 })
 
@@ -415,25 +427,25 @@ async function connect() {
     await sqlCon();
 }
 
-async function addUserToDb(user, pass) {
-    var prev_user = await coll.findOne({"username": user});
-    if(prev_user) {
-        return "Such user already exists";
-    } 
-    coll.insertOne({"username": user, "password": pass});
-    return "ok";
-}
+// async function addUserToDb(user, pass) {
+//     var prev_user = await coll.findOne({"username": user});
+//     if(prev_user) {
+//         return "Such user already exists";
+//     } 
+//     coll.insertOne({"username": user, "password": pass});
+//     return "ok";
+// }
 
-async function checkCredentials(user, pass) {
-    var cur_user = await coll.findOne({"username": user});    
-    if(!cur_user) {
-        return "Such user does not exist";
-    } 
-    if(cur_user.password!=pass) {
-        return "Incorrect password";
-    }
-    return "ok";
-}
+// async function checkCredentials(user, pass) {
+//     var cur_user = await coll.findOne({"username": user});    
+//     if(!cur_user) {
+//         return "Such user does not exist";
+//     } 
+//     if(cur_user.password!=pass) {
+//         return "Incorrect password";
+//     }
+//     return "ok";
+// }
 
 async function getFlights() {
     const q = "select loc1.city_name as c1, loc2.city_name as c2, \
