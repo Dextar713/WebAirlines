@@ -111,7 +111,8 @@ function admin_log(req, res, next) {
 }
 
 app.get('/', (req, res) => {
-    res.render('profile.html');
+    // res.render('profile.html');
+    res.redirect('/airline');
 })
 
 app.get('/airline', async (req, res) => {

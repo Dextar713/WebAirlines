@@ -7,5 +7,5 @@ function convex_git() {
 }
 
 function air_git() {
-    window.location.href = window.location.href + "/airline";
+    window.location.href = window.location.href + "airline";
 }
