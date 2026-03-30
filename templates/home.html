@@ -72,6 +72,10 @@
     <h1>Upcoming flights</h1>
     <div class="flex-flights">
       <% for (f of all_flights) { 
+            if (!f.departure_time || isNaN(new Date(f.departure_time).getTime())) {
+                console.log('Skipping invalid flight date:', f.departure_time);
+                continue;
+            }
             var start_date = new Date(f.departure_time);
             var start_date_str = start_date.toISOString();
             var tm = start_date_str.split("T")[1];
